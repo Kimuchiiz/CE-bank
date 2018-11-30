@@ -32,6 +32,8 @@ urlpatterns = [
 
     path('bankaccount/<int:bankaccount_id>/favorite/<int:favorite_id>/delete', views.DeleteFavorite, name='favorite-delete'),
 
+    path('bankaccount/<int:bankaccount_id>/changepin',views.ChangePin, name='changepin'),
+
     path('enterbankacc/',views.EnterBankAcc, name='enterbankacc'),
 
     path('logout/',views.logout_view, name='logout'),

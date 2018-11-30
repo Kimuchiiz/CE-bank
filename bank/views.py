@@ -6,7 +6,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views import generic
 from django.views.generic import View
-from .forms import TransferForm,Transfer2Form, AddBankAccForm,DepositAndWithdrawForm,EnterBankAccForm,AddFavoriteForm
+from .forms import TransferForm,Transfer2Form, AddBankAccForm,DepositAndWithdrawForm,EnterBankAccForm,AddFavoriteForm,ChangePinForm
 from accounts.models import BankAccount
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
@@ -306,3 +306,31 @@ def DeleteFavorite(request,bankaccount_id,favorite_id):
         if(favorite.bankaccount ==  BankAccount.objects.get(id = bankaccount_id)):
             favorite.delete()
             return redirect('bank:favorite',bankaccount_id)
+
+@login_required
+def ChangePin(request,bankaccount_id):
+    form = ChangePinForm()
+    if request.user.is_staff:
+        template_name = 'bank/staff_changepin.html'
+    else:
+        template_name = 'bank/changepin.html'
+    if (request.user.is_staff) or (request.user.bankaccount_set.get(id = bankaccount_id) is not None):
+    
+        if request.method == 'POST':
+            bankaccount = BankAccount.objects.get(id=bankaccount_id)
+            changepinForm = ChangePinForm(request.POST)
+        
+            if changepinForm.is_valid():
+                old_pin = changepinForm.cleaned_data['old_pin']
+                pin = changepinForm.cleaned_data['pin']
+                if(old_pin == bankaccount.pin):
+                    bankaccount.pin = pin
+                    bankaccount.save()
+                    return redirect('bank:bankacc-detail',bankaccount_id)
+                else:
+                    return render(request,template_name,{'error_message':"Invalid Old PIN",'form':form,'bankaccount_id':bankaccount_id})
+        else: 
+            return render(request,template_name,{'form':form,'bankaccount_id':bankaccount_id})
+
+    else:
+         return render(request,template_name,{'form':form,'bankaccount_id':bankaccount_id})

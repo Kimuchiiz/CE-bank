@@ -4,7 +4,7 @@
 
 <head>
 
-    <title>Detail</title>
+    <title>Bank Account Details</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -35,8 +35,10 @@
             height: 425px;
             background-color: white;
             border-radius: 100%;
-            margin-left: 525px;
-            margin-top: 100px;
+            top: 50%;
+            left: 50%;
+            margin-right: -50%;
+            transform: translate(-50%, -50%);
             position: absolute;
 
         }
@@ -113,7 +115,7 @@
                     history</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="\accounts\detail" style="margin-left:895px">Account</a>
+                <a class="nav-link " href="\accounts\detail" style="position: absolute; right: 6.5%;">Account</a>
             </li>
         </ul>
         <a href="\logout" class="btn btn-outline-success btn-md ml-auto " id="okBtn">LOG OUT</a>
@@ -126,6 +128,7 @@
             <p class=accNO>No. {{bankaccount.number}}</p>
             <p>{{bankaccount.firstname}} {{bankaccount.surname}}</p>
             <p>{{bankaccount.balance}} THB</p>
+            <a href="\bankaccount\{{bankaccount_id}}\changepin" class="btn btn-outline-success btn-md ml-auto " id="okBtn" style="position: absolute; left: 37.5%;">Change PIN</a>
         </div>
     </div>
 

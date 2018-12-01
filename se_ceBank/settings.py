@@ -25,7 +25,7 @@ SECRET_KEY = '69t%4bq*gz3%wurqu1d&-h9k$bh5ew7*xhxc-w)j-($6n@jrz7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.2']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -127,3 +127,4 @@ EMAIL_HOST_USER = 'CeBank.kmitl'
 EMAIL_HOST_PASSWORD = 'CeBank2018'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'CeBank Team <CeBank.kmitl@gmail.com>'
+SECURE_SSL_REDIRECT = False

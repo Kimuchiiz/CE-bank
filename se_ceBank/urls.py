@@ -15,11 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.views.generic.base import RedirectView
 
+favicon_view = RedirectView.as_view(url='/static/ceBank.png', permanent=True)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('', include('bank.urls')),
-    path('',include('django.contrib.auth.urls'))
+    path('',include('django.contrib.auth.urls')),
+    path('favicon.ico/',favicon_view),
 ]

@@ -1,6 +1,7 @@
 from django.urls import path,include
 from . import views
 
+
 app_name = 'accounts'
 
 urlpatterns = [
@@ -16,6 +17,7 @@ urlpatterns = [
     path('detail/', views.AccDetail, name='acc-detail'),
 
     path('password/', views.change_password, name='change_password'),
+
     
     #/accounts/<user_id>/
     #path('<int:user_id>/', views.detail, name='user-detail'),

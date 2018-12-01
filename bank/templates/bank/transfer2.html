@@ -29,7 +29,6 @@
     <style>
 
         body{
-            margin-top: 5rem;
             background-color: rgb(172, 170, 169);
 
         }
@@ -55,16 +54,20 @@
 
         #acc1{
           border-radius: 100%;
-          margin-left: 150px;
-          margin-top: 50px;
-          position:absolute;
+          margin-top: 220px;
+          top: 28%;
+          left: 30%;
+          transform: translate(-50%, -50%);
+          position: absolute;
         }
 
         #acc2{
           border-radius: 100%;
-          margin-left: 950px;
-          margin-top: 50px;
-          position:absolute;
+          margin-top: 220px;
+          top: 28%;
+          left: 70%;
+          transform: translate(-50%, -50%);
+          position: absolute;
 
         }
 
@@ -73,9 +76,12 @@
           height: 100px;
           background-image: url("{% static 'rightArrow2.png' %}");
           background-size: 125px 100px;
-          margin-left: 685px;
-          margin-top: 200px;
-          position:absolute;
+          margin-top: 220px;
+          top: 28%;
+          left: 50%;
+          margin-right: -50%;
+          transform: translate(-50%, -50%);
+          position: absolute;
         }
 
         #confirmBtn{
@@ -145,7 +151,7 @@
         #amountInput{
             margin-left:auto;
             margin-right:auto;
-            margin-top:25%;
+            margin-top:28%;
         }
 
         #nextBtn{
@@ -156,7 +162,7 @@
         #ihelp{
             position: absolute;
             left: 60%;
-            top:69%;
+            top:70.5%;
         }
             
           .tooltip-inner {
@@ -170,29 +176,37 @@
 
 
 <body>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top ">
-        <a class="navbar-brand" href="\">
-            <img src="{% static 'ceBank.png' %}" alt="logo" style="width:45px;">
-        </a>
-        <ul class="navbar-nav ">
-
-            <li class="nav-item">
-                <a class="nav-link" href="\bankaccount\{{bankaccount_id}}\favorite">Transfer</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="\bankaccount\{{bankaccount_id}}\history">Transaction
-                    history</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="\accounts\detail" style="margin-left:1040px">Account</a>
-            </li>
-        </ul>
-        <a href="\logout" class="btn btn-outline-success btn-md ml-auto " id="okBtn">LOG OUT</a>
-    </nav>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="z-index:1;">
+                <a class="navbar-brand" href="\">
+                        <img src="{% static 'ceBank.png' %}" alt="logo" style="width:45px;">
+                    </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                    <a class="nav-link" href="\bankaccount\{{bankaccount_id}}\favorite">Transfer</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="\bankaccount\{{bankaccount_id}}\history">Transaction
+                                        history</a>
+                                </li>
+                    </ul>
+                <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link " href="\accounts\detail">Account</a>
+                        </li>
+                        <li>
+                            <a href="\logout" class="btn btn-outline-success btn-md ml-auto " id="okBtn">LOG OUT</a>
+                        </li>
+                    </ul>
+            </div>    
+        </nav>
 
 
     <div class="container-fluid">
-        <h1> Transfer</h1>
+        <h1 style="margin-top:2%"> Transfer</h1>
 
         <div class="account" id="acc1">
             <div class="insertIMG"><img src="{% static 'account.png' %}" width="110" height="85"></div>
@@ -225,7 +239,6 @@
                     {% endif %}
                 </div>
 
-                <br>
                 <button type="submit" class="btn btn-success btn-md" data-toggle="modal" data-target="#pinModal" id="nextBtn">Next</button>
                 <!--modal page-->
                 <div class="modal fade" name="pinModal" id="pinModal" role="dialog">

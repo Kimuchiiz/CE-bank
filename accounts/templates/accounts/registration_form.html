@@ -46,7 +46,6 @@
     <style>
 
         body {font-family: Arial, Helvetica, sans-serif;
-            margin-top: 5rem;
             background-color: rgb(172, 170, 169);
             }
 * {box-sizing: border-box}
@@ -142,12 +141,14 @@ label{
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top ">
-        <a class="navbar-brand" href="\">
-            <img src="{% static 'ceBank.png' %}" alt="logo" style="width:45px; ">
-        </a>
-
-    </nav>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="z-index:1;">
+                <a class="navbar-brand" href="\">
+                        <img src="{% static 'ceBank.png' %}" alt="logo" style="width:45px;">
+                    </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+        </nav>
 
     <form role="form" action="" method="post">
         {% csrf_token %}

@@ -178,7 +178,7 @@
                 <p id="accNO">No {{ transactionlog.frombankaccount.number }}</p>
                 <p id="name"> {{ transactionlog.frombankaccount.firstname }} {{ transactionlog.frombankaccount.surname }}</p>
                 {% else %}
-                <p id="textUser">None</p>
+                <p id="textUser">Bank</p>
                 {% endif %}
                 
             </div>
@@ -189,7 +189,7 @@
                 <p id="accNO">No {{ transactionlog.tobankaccount.number }}</p>
                 <p id="name"> {{ transactionlog.tobankaccount.firstname }} {{ transactionlog.tobankaccount.surname }}</p>
                 {% else %}
-                <p id="textUser">None</p>
+                <p id="textUser">Bank</p>
                 {% endif %}
             </div>
             <p id="textAmount">Amount</p>
@@ -197,6 +197,7 @@
             <br>
             <p id="datetime">{{ transactionlog.datetime }}</p>
             <a href="\bankaccount\{{bankaccount_id}}\" class="btn btn-success btn-md " id="doneBtn">Done</a>
+            <div class="insertIMG"> <img src="{% static 'watermask.png' %}"  width="420" height="420" style="top: 50%; left: 50%;transform: translate(-50%, -50%); position: absolute "></div>
         </div>
         
     </div>

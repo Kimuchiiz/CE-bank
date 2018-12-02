@@ -126,6 +126,11 @@
             background-color: green;
         }
 
+        #myTable td 
+        {
+        vertical-align: middle;
+        }
+
     </style>
 
 </head>
@@ -177,7 +182,8 @@
         <th>To Bank Account</th>
         <th>To Firstname</th>
         <th>To Lastname</th>
-        <th>amount</th>
+        <th>Amount</th>
+        <th>Receipt</th>
       </tr>
     </thead>
     <tbody id="myTable">
@@ -192,7 +198,11 @@
         <td>{{ transactionlog.tobankaccount.number}}</td> 
         <td>{{ transactionlog.tobankaccount.firstname}}</td>
         <td>{{ transactionlog.tobankaccount.surname}}</td>  
-        <td>{{ transactionlog.amount}}</td> 
+        <td>{{ transactionlog.amount}}</td>
+        <td><a href="\bankaccount\{{bankaccount_id}}\receipt\{{transactionlog.id}}" >
+            <button type="button" class="btn btn-success ml-auto " >Receipt
+            </button>
+        </a>   </td>
       </tr>
     {% endfor %}
     </tbody>

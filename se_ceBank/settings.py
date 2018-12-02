@@ -123,8 +123,7 @@ STATIC_URL = '/static/'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'CeBank.kmitl'
+EMAIL_HOST_USER = 'CeBank2.kmitl'
 EMAIL_HOST_PASSWORD = 'CeBank2018'
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'CeBank Team <CeBank.kmitl@gmail.com>'
-SECURE_SSL_REDIRECT = False
+DEFAULT_FROM_EMAIL = 'CeBank Team <CeBank2.kmitl@gmail.com>'

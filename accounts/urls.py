@@ -18,6 +18,8 @@ urlpatterns = [
 
     path('password/', views.change_password, name='change_password'),
 
+    path('',include('django.contrib.auth.urls')),
+
     
     #/accounts/<user_id>/
     #path('<int:user_id>/', views.detail, name='user-detail'),

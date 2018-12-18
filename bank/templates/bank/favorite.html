@@ -116,7 +116,7 @@
 </head>
 
 <body>
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="z-index:1;">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="z-index:1;" id="header">
                 <a class="navbar-brand" href="\">
                         <img src="{% static 'ceBank.png' %}" alt="logo" style="width:45px;">
                     </a>
@@ -154,7 +154,7 @@
             {% for favorite in all_favorites %}
 
 
-            <div class="col-sm-3 ">
+            <div class="col-lg-3 ">
                 <div class="thumbnail">
                     <div class="reg">
                         <br>
@@ -207,7 +207,7 @@
             {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
             {% endfor %}
 
-            <div class="col-sm-3 ">
+            <div class="col-lg-3 ">
                 <div class="reg">
                     <a href="\bankaccount\{{bankaccount_id}}\favorite\add">
                         <button type="button" class="btn btn-success " style="margin-top:105px; border-radius:100%;">
@@ -216,7 +216,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-sm-3 ">
+            <div class="col-lg-3 ">
                 <div class="reg" >
                         <a href="\bankaccount\{{bankaccount_id}}\transfer\">       
                                 <button type="button" class="btn btn-success ml-auto" style="margin-top:105px; border-radius:10%; font-size:18px;">Skip
@@ -230,4 +230,12 @@
     </div>
 </body>
 
+<script>
+        var leftOffset = parseInt($("#header").css('left')); //Grab the left position left first
+    $(window).scroll(function(){
+        $('#header').css({
+            'left': $(this).scrollLeft() + leftOffset //Use it later
+        });
+    });
+    </script>
 </html>

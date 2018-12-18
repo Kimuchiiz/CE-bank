@@ -44,20 +44,10 @@
 
         #acc1{
           border-radius: 100%;
-          margin-top: 220px;
-          top: 28%;
-          left: 30%;
-          transform: translate(-50%, -50%);
-          position: absolute;
         }
 
         #acc2{
           border-radius: 100%;
-          margin-top: 220px;
-          top: 28%;
-          left: 70%;
-          transform: translate(-50%, -50%);
-          position: absolute;
 
         }
 
@@ -66,12 +56,6 @@
           height: 100px;
           background-image: url("{% static 'rightArrow2.png' %}");
           background-size: 125px 100px;
-          margin-top: 220px;
-          top: 28%;
-          left: 50%;
-          margin-right: -50%;
-          transform: translate(-50%, -50%);
-          position: absolute;
         }
 
         #confirmBtn{
@@ -138,35 +122,37 @@
             margin-right:30px;
         }
         
-        #amountInput{
-            margin-left:auto;
-            margin-right:auto;
-            margin-top:25%;
-        }
-
-        #nextBtn{
-            margin-left:48%;
-            
-        }
-
-        #ihelp{
-            position: absolute;
-            left: 60%;
-            top:69%;
-        }
 
           .tooltip-inner {
     max-width: 303px;
     /* If max-width does not work, try using width instead */
      
 }
+
+.container {
+    display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-flow: row wrap;
+  margin-top: 5%;
+  
+}
+
+.container2 {
+    display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-flow: row wrap;
+  margin-top: 2%;
+}
+
     </style>
 
 </head>
 
 
 <body>
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="z-index:1;">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="z-index:1;" id="header">
                 <a class="navbar-brand" href="\">
                         <img src="{% static 'ceBank.png' %}" alt="logo" style="width:45px;">
                     </a>
@@ -200,9 +186,9 @@
             </div>    
         </nav>
 
-
-    <div class="container-fluid">
-        <h1 style="margin-top:2%"> Transfer</h1>
+        <h1 align="center" style="margin-top:2%"> Transfer</h1>
+    <div class="container">
+        
 
         <div class="account" id="acc1">
             <div class="insertIMG"><img src="{% static 'account.png' %}" width="110" height="85"></div>
@@ -217,24 +203,30 @@
             <p class=accNO>No. {{tobankaccount.number}}</p>
             <p>{{tobankaccount.firstname}} {{tobankaccount.surname}}</p>
         </div>
-
-        <div class="container-fluid">
+    </div>
+        <div class="container2">
+                <div>
             <form role="form" action="" method="post">
                 {% csrf_token %}
-                <div class="form-group">
-                    
-                    <input type="text" class="form-control text-center" pattern="[0-9]+(.[0-9]{1,2})?" id="amountInput"
-                        placeholder="Amount" name="amount" style="width:20%; " required>
+                
+                <div style="display:inline-block">
+                    <input type="text" class="form-control text-center" pattern="([0-9]+)?(.[0-9]{1,2})?" id="amountInput"
+                        placeholder="Amount" name="amount" maxlength="12" style="position:relative; left:13px; width: 250px;"  required>
+                </div>
+                <div style="display:inline-block">
                         <a id="ihelp" data-toggle="tooltip" title="Amount must be 0-9 and more than 0.
                     Amount can have up to 2 decimal places.">
-                        <img src="{% static 'i.png' %}" style="width:20px; height:20px;"></a>
+                        <img src="{% static 'i.png' %}" style="position:relative; left:10px; width:20px; height:20px;"></a>
+                    </div>
+                                
                     {% if error_message %}
                     <p style="color:red"><strong>{{error_message}}</strong></p>
                     {% endif %}
-                </div>
-
-                <br>
+                </div> 
+            </div>
+            <div class="container2" style="align-items:flex-start">
                 <button type="submit" class="btn btn-success btn-md" data-toggle="modal" data-target="#pinModal" id="nextBtn">Next</button>
+            </div>
                 <!--modal page-->
                 <div class="modal fade" id="pinModal" role="dialog">
                     <div class="modal-dialog">
@@ -246,25 +238,30 @@
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                             <div class="modal-body">
-                                <div class="form-group">
-                                    <div class="form-group">
 
                                         <input type="password" class="form-control text-center" pattern="[0-9]{4}" name="pin"
                                             maxlength="4" required>
 
-                                    </div>
-                                    <button type="submit" class="btn btn-success btn-md " id="okBtn">OK</button>
-                                </div>
+                                    <button type="submit" class="btn btn-success btn-md " id="okBtn" style="margin-top: 10px; float: right;">OK</button>
+                            </div>
+                        </div>
+                    </div>
 
             </form>
 
         </div>
 
 
-    </div>
-
-
 
 </body>
+
+<script>
+        var leftOffset = parseInt($("#header").css('left')); //Grab the left position left first
+    $(window).scroll(function(){
+        $('#header').css({
+            'left': $(this).scrollLeft() + leftOffset //Use it later
+        });
+    });
+    </script>
 
 </html>

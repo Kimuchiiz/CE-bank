@@ -45,20 +45,10 @@
 
         #acc1{
           border-radius: 100%;
-          margin-top: 220px;
-          top: 28%;
-          left: 30%;
-          transform: translate(-50%, -50%);
-          position: absolute;
         }
 
         #acc2{
           border-radius: 3%;
-          margin-top: 220px;
-          top: 28%;
-          left: 70%;
-          transform: translate(-50%, -50%);
-          position: absolute;
 
         }
 
@@ -67,19 +57,8 @@
           height: 100px;
           background-image: url("{% static 'rightArrow2.png' %}");
           background-size: 125px 100px;
-          margin-top: 220px;
-          top: 28%;
-          left: 50%;
-          margin-right: -50%;
-          transform: translate(-50%, -50%);
-          position: absolute;
         }
 
-        #nextBtn{
-          margin-left: 350px;
-          margin-top: 150px;
-          position: absolute;
-        }
 
         .insertIMG{
             margin-left: 160px;
@@ -112,12 +91,22 @@
     /* If max-width does not work, try using width instead */
      
 }
+
+.container {
+    display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-flow: row wrap;
+  margin-top: 5%;
+  min-width: 450px;
+}
+
     </style>
 
 </head>
 
 <body>
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="z-index:1;">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="z-index:1;" id="header">
                 <a class="navbar-brand" href="\">
                         <img src="{% static 'ceBank.png' %}" alt="logo" style="width:45px;">
                     </a>
@@ -151,43 +140,49 @@
             </div>    
         </nav>
 
-
-    <div class="container-fluid">
-        <h1 style="margin-top:2%;">Deposit</h1>
-        <div class="account" id="acc1">
-            <div class="insertIMG"><img src="{% static 'account.png' %}" width="110" height="85"></div>
-            <p class=accNO>No. {{bankaccount.number}}</p>
-            <p>{{bankaccount.firstname}} {{bankaccount.surname}}</p>
-            <p>{{bankaccount.balance}} THB</p>
-        </div>
-
-        <div class="rightArrow2"></div>
-
-        <div class="account" id="acc2">
-            <div class="insertIMG" id="deposit"><img src="{% static 'deposit.png' %}" width="120" height="120"> </div>
-
-            <div class="container-fluid">
-                <form role="form" action="" method="post">
-                    {% csrf_token %}
+        <h1 style="margin-top:2%" align="center">Deposit</h1>
+        <div class="container">
+            <div class="account" id="acc1">
+                <br>
+                <div class="insertIMG"><img src="{% static 'account.png' %}" width="110" height="85"></div>
+                <p class=accNO>No. {{bankaccount.number}}</p>
+                <p>{{bankaccount.firstname}} {{bankaccount.surname}}</p>
+                <p>{{bankaccount.balance}} THB</p>
+            </div>
+    
+            <div class="rightArrow2"></div>
+    
+            <div class="account" id="acc2">
+                <div class="insertIMG"><img src="{% static 'deposit.png' %}" width="120" height="120"> </div>
+    
+                <div class="container">
                     <div class="form-group">
-                        <br>
-                        <br>
-                        <br>
-                        <a class="ihelp" data-toggle="tooltip" title="Amount must be 0-9 and more than 0.
-                        Amount can have up to 2 decimal places.">
-                            <img src="{% static 'i.png' %}" style="width:20px; height:20px;"></a>
-                        <input type="text" class="form-control text-center" pattern="[0-9]+(.[0-9]{1,2})?" id="amountInput"
-                            placeholder="Deposit amount" name="amount" maxlength="12" required>
-                    </div>
-                    {% if error_message %}
-                    <p style="color:red"><strong>{{error_message}}</strong></p>
-                    {% endif %}
-                    <button type="submit" class="btn btn-success btn-md " id="nextBtn">Next</button>
-                </form>
+                    <form role="form" action="" method="post">
+                        {% csrf_token %}
+                            <a class="ihelp" data-toggle="tooltip" title="Amount must be 0-9 and more than 0.
+                            Amount can have up to 2 decimal places.">
+                                <img src="{% static 'i.png' %}" style="width:20px; height:20px;"></a>
+                                <input type="text" class="form-control text-center" pattern="([0-9]+)?(.[0-9]{1,2})?" id="amountInput"
+                                placeholder="Amount" name="amount" maxlength="12" style="position:relative; right:11px;"  required>
+                            {% if error_message %}
+                            <p style="color:red;"><strong>{{error_message}}</strong></p>
+                            {% endif %}
+                        </div>
+                        <button type="submit" class="btn btn-success btn-md" data-toggle="modal" data-target="#pinModal" id="nextBtn" style="margin-top: 7%">Next</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-
+        </div>  
 </body>
+
+<script>
+        var leftOffset = parseInt($("#header").css('left')); //Grab the left position left first
+    $(window).scroll(function(){
+        $('#header').css({
+            'left': $(this).scrollLeft() + leftOffset //Use it later
+        });
+    });
+    </script>
 
 </html>

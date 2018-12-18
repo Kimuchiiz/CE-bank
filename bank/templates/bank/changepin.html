@@ -36,17 +36,6 @@
             background-size: 50px 30px;
         }
         
-        .changePin{
-            width:500px;
-            height:425px;
-            margin-top: 250px;
-            top: 20%;
-            left: 50%;
-            margin-right: -50%;
-            transform: translate(-50%, -50%);
-            position: absolute;
-        }
-        
         
         #acc1{
           border-radius: 100%;
@@ -73,10 +62,12 @@
           position:absolute;
         }
 
-        #doneBtn{
-          margin-left: 405px;
-          margin-top: 50px;
-          position: absolute;
+         #doneBtn{
+           position:relative;
+            margin-bottom: -20%;
+            left: 50%;
+            margin-right: -50%;
+            transform: translate(-50%, -50%);
         }
 
         .insertIMG{
@@ -99,18 +90,18 @@
             margin-top:-50%;
         }
 
-        #error{
-            top: 27%;
-            left: 50%;
-            margin-right: -50%;
-            transform: translate(-50%, -50%);
-            position: absolute;
-        }
-
           .tooltip-inner {
     max-width: 303px;
     /* If max-width does not work, try using width instead */
      
+}
+
+        .form-group{
+    width:25%;
+    min-width: 300px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 5%;
 }
 
     </style>
@@ -118,7 +109,7 @@
 </head>
 
 <body>
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="z-index:1;">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="z-index:1;" id="header">
                 <a class="navbar-brand" href="\">
                         <img src="{% static 'ceBank.png' %}" alt="logo" style="width:45px;">
                     </a>
@@ -147,7 +138,7 @@
         </nav>
 
     <div class="container-fluid">
-        <h1>Please fill up this form</h1>.
+        <h1>Please fill up this form.</h1>
         <div class="changePin">
 
             <div class="container-fluid">
@@ -156,14 +147,15 @@
 
                     <div class="form-group">
                         <br>
+                        {% if error_message %}
+                        <p id= "error" style="color:red"><strong>{{error_message}}</strong></p>
+                    {% endif %}
                         <label for="pin" style="color:rgb(102, 101, 101);">Old PIN
                             <a class="ihelp" data-toggle="tooltip" title="PIN must be 0-9 and have 4 digits.">
                                 <img src="{% static 'i.png' %}" style="width:20px; height:20px;"></a>
                         </label>
                         <input type="password" class="form-control text-center" pattern="[0-9]{4}" id="pinInput" name="old_pin" placeholder="Enter your old PIN"
                             maxlength="4" required>
-                    </div>
-                    <div class="form-group">
                         <br>
                         <label for="pin" style="color:rgb(102, 101, 101);">New PIN
                             <a class="ihelp" data-toggle="tooltip" title="PIN must be 0-9 and have 4 digits.">
@@ -171,12 +163,11 @@
                         </label>
                         <input type="password" class="form-control text-center" pattern="[0-9]{4}" id="pinInput" name="pin" placeholder="Enter your new PIN"
                             maxlength="4" required>
+
+                        <button type="submit" class="btn btn-success btn-md" id="doneBtn">Done</button>
                     </div>
 
-                    {% if error_message %}
-                        <p id= "error" style="color:red"><strong>{{error_message}}</strong></p>
-                    {% endif %}
-                    <button type="submit" class="btn btn-success btn-md" id="doneBtn">Done</button>
+
 
                 </form>
             </div>
@@ -192,4 +183,12 @@
 
 </body>
 
+<script>
+        var leftOffset = parseInt($("#header").css('left')); //Grab the left position left first
+    $(window).scroll(function(){
+        $('#header').css({
+            'left': $(this).scrollLeft() + leftOffset //Use it later
+        });
+    });
+    </script>
 </html>

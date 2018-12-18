@@ -122,7 +122,7 @@
 </head>
 
 <body>
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="z-index:1;">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="z-index:1;" id="header">
                 <a class="navbar-brand" href="\">
                         <img src="{% static 'ceBank.png' %}" alt="logo" style="width:45px;">
                     </a>
@@ -150,7 +150,7 @@
             {% for bankaccount in all_bankaccounts %}
 
 
-            <div class="col-sm-3 ">
+            <div class="col-lg-3 ">
                 <div class="thumbnail">
                     <div class="reg">
                         <br>
@@ -202,7 +202,7 @@
             {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
             {% endfor %}
 
-            <div class="col-sm-3 ">
+            <div class="col-lg-3 ">
                 <div class="reg">
                     <a href="{% url 'bank:bankacc-add' %}">
                         <button type="button" class="btn btn-success " style="margin-top:105px; border-radius:100%;">
@@ -218,4 +218,13 @@
     </div>
 </body>
 
+<script>
+        var leftOffset = parseInt($("#header").css('left')); //Grab the left position left first
+    $(window).scroll(function(){
+        $('#header').css({
+            'left': $(this).scrollLeft() + leftOffset //Use it later
+        });
+    });
+    </script>
+    
 </html>

@@ -68,9 +68,14 @@ def AddBankAccount(request):
             pin = addbankaccForm.cleaned_data['pin']
 
             if bankaccount.pin == pin:
+                try:
+                    request.user.bankaccount_set.get(id = bankaccount.pk)
+                    return render(request,template_name,{'error_message':'Already Add this Bank Account','form':form})
+                except BankAccount.DoesNotExist:
                     bankaccount.user.add(request.user)
                     bankaccount.save()
                     return redirect('bank:index') 
+               
             else:
                 return render(request,template_name,{'error_message':'Invalid PIN','form':form})
         else: 
